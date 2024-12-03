@@ -8,39 +8,6 @@ using BCrypt.Net;
 using System.IO;
 namespace czu_password_manager
 {
-    /*
-     
-     try
-            {
-                // Reading file -> Outputing file contents
-                FileStream fileStream = File.Open(fileName, FileMode.Open, FileAccess.Read);
-                byte[] fileData = new byte[fileStream.Length];
-                UTF8Encoding dataStream = new UTF8Encoding();
-                while (fileStream.Read(fileData, 0, fileData.Length) > 0)
-                {
-                    Console.WriteLine(dataStream.GetString(fileData));
-                }
-            }
-            catch (IOException fileNotFound)
-            {
-                Console.WriteLine($"File {fileName} doesn't exist\n {fileNotFound.ToString()}\n {fileName} will be created.");
-            }
-            finally
-            {
-                // If file doesn't exist create it and re-run function
-                if (!File.Exists(fileName))
-                {
-
-                    string loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, \r\nsed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, \r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\r\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\r\nExcepteur sint occaecat cupidatat non proident, \r\nsunt in culpa qui officia deserunt mollit anim id est laborum.";
-                    FileStream fs = File.Create(fileName);
-                    byte[] data = new UTF8Encoding().GetBytes(loremIpsum);
-                    fs.Write(data, 0, data.Length);
-                    fs.Close();
-                    TryCatch();
-                }
-            }
-     
-     */
 
     internal class MasterPassword
     {
