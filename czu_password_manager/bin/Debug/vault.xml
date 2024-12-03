@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCredential xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Credential>
+    <name>b</name>
+    <username>b</username>
+    <password>b</password>
+  </Credential>
+  <Credential>
+    <name>a</name>
+    <username>a</username>
+    <password>a</password>
+  </Credential>
+  <Credential>
+    <name>datart.cz</name>
+    <username>jenda233</username>
+    <password>MojeJendaHeslo</password>
+  </Credential>
+</ArrayOfCredential>
