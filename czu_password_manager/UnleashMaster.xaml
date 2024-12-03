@@ -22,7 +22,7 @@
                     </ControlTemplate>
                 </PasswordBox.Template>
             </PasswordBox>
-            <TextBox Name="oldPasswordTextBox" Background="#607080" BorderBrush="#203040" Width="260" Height="30" FontSize="12" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Visibility="Visible">
+            <TextBox Name="oldPasswordTextBox" Background="#607080" BorderBrush="#203040" Width="260" Height="30" FontSize="12" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Visibility="Collapsed">
                 <TextBox.Template>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">

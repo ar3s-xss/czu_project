@@ -51,12 +51,12 @@ namespace czu_password_manager
             return hashedMasterPassword;
         }
         // Verifying master password
-        private bool VerifyMasterPassword(string masterPassword, string hasehedMasterPassword) 
+        internal bool VerifyMasterPassword(string masterPassword, string hasehedMasterPassword) 
         {
             return BCrypt.Net.BCrypt.Verify(masterPassword, hasehedMasterPassword);
         }
 
-        //  Creating Master Password
+        //  Creating master password
         public void CreateMasterPassword(string master)
         {
             string hashMaster = HashMasterPassword(master);

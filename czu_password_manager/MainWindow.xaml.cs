@@ -25,7 +25,7 @@ namespace czu_password_manager
         public MainWindow()
         {
             InitializeComponent();
-            SetCreatePassword();
+            
         }
 
         private void Login_Button(object sender, RoutedEventArgs e)
@@ -35,7 +35,12 @@ namespace czu_password_manager
         // Provizorni kontrola hesla
         private void CheckPassword(string password)
         {
-            if (password == "Heslo123")
+            MasterPassword masterObject = new MasterPassword();
+            Algorithms algObject = new Algorithms();
+            string master = File.ReadAllText(algObject.Rot1_3());
+            bool masterMatch = masterObject.VerifyMasterPassword(password, master);
+            
+            if (masterMatch == true)
             {
                 
                 AfterLogin afterLoginWindow = new AfterLogin();
@@ -60,23 +65,12 @@ namespace czu_password_manager
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
             UnleashMaster unleashMasterWindow = new UnleashMaster();
-            unleashMasterWindow.PasswordSet();
+            unleashMasterWindow.doesMasterExist();
             unleashMasterWindow.Show();
             
             this.Close();
         }
-        private void SetCreatePassword()
-        {
-            /*
-            if (!File.Exists("MasterHash.txt"))
-            {
-                SetGet.Visibility = Visibility.Visible;
-            } else
-            {
-                SetGet.Visibility = Visibility.Collapsed;
-            }
-            */
-        }
+        
         private void ToggleMasterVisibility(object sender, RoutedEventArgs e)
         {
             if (master.Visibility == Visibility.Visible)

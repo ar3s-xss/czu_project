@@ -63,7 +63,7 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <!-- Button with proper margins to avoid overlapping -->
-                <Button Name="logBtn" Content="Unlock" Background="#607080" Height="43" Width="151" Margin="0,30,10,0" Click="Login_Button" FontSize="10" FontWeight="DemiBold">
+                <Button Name="logBtn" Content="Unlock 🔒" Background="#607080" Height="43" Width="151" Margin="0,30,10,0" Click="Login_Button" FontSize="10" FontWeight="DemiBold">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">

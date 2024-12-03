@@ -24,12 +24,16 @@ namespace czu_password_manager
         {
             InitializeComponent();
         }
-
+        const string fileName = "masterHash.txt";
         private bool setCreate = false;
         public void PasswordSet()
         {
-            const string fileName = "masterHash.txt";
             
+        }
+        public void doesMasterExist()
+        {
+            
+
             byte[] bytes = File.ReadAllBytes(fileName);
             if (!File.Exists(fileName) || bytes.Length > 0)
             {
@@ -37,21 +41,47 @@ namespace czu_password_manager
                 oldPassGrid.Visibility = Visibility.Visible;
                 setCreate = true;
             }
-            else 
+            else
             {
                 oldPassLbl.Visibility = Visibility.Collapsed;
                 oldPassGrid.Visibility = Visibility.Collapsed;
                 setCreate = false;
             }
         }
+        public void PasswordChange() 
+        {
 
+            string master = File.ReadAllText(fileName);
+
+                
+        }
         private void SetChangeMaster(object sender, RoutedEventArgs e)
         {
             MasterPassword masterObject = new MasterPassword();
             if (setCreate == true)
             {
+                string master = File.ReadAllText(fileName);
+                bool isMaster = masterObject.VerifyMasterPassword(oldPassword.Password, master);
+                if (isMaster == true && !(newPassword.Password == string.Empty || againNewPassword.Password == string.Empty))
+                {
+                    if (newPassword.Password == againNewPassword.Password)
+                    {
+                        masterObject.CreateMasterPassword(newPassword.Password);
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
+                        this.Close();
+                    }
+                } else if (isMaster && !(newPassword.Password == againNewPassword.Password))
+                {
+                    errorLbl.Content = "Passwords do not match!";
+                } else
+                {
+                    errorLbl.Content = "Wrong master password!";
+                }
                 
-            } else
+            }  
+            // if master password doesnt exist -> master will be created
+            else 
             {
                 if (!(newPassword.Password == string.Empty || againNewPassword.Password == string.Empty)) 
                 {
