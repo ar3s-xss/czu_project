@@ -45,13 +45,16 @@ namespace czu_password_manager
                 
                 AfterLogin afterLoginWindow = new AfterLogin();
                 afterLoginWindow.Show();
-                afterLoginWindow.ChangeLabel("You have entered your password vault!!!");
+                //afterLoginWindow.ChangeLabel("You have entered your password vault!!!");
 
                 this.Close();
             } else
             {
-                label1.Content = "Wrong Password!!!";
-                label1.Background = new SolidColorBrush(Colors.Red);
+                //label1.Content = "Wrong Password!!!";
+                //label1.Background = new SolidColorBrush(Colors.Red);
+                errorLbl.Visibility = Visibility.Visible;
+                errorLbl.Content = "Wrong master password!";
+                
             }
         }
         private void password_KeyDown(object sender, KeyEventArgs e)
