@@ -6,11 +6,31 @@
         xmlns:local="clr-namespace:czu_password_manager"
         mc:Ignorable="d"
         
-        Title="MainWindow" Height="500" Width="800" ResizeMode="CanResize" MinWidth="600" MinHeight="400">
+        Title="MainWindow" Height="500" Width="800" ResizeMode="CanResize" MinWidth="600" MinHeight="400" MaxHeight="600" MaxWidth="900">
+    <Window.Resources>
+        <ControlTemplate x:Key="NoMouseOverButtonTemplate"   
+                 TargetType="Button">
+            <Border Background="{TemplateBinding Background}"  
+          BorderBrush="{TemplateBinding BorderBrush}"  
+          BorderThickness="{TemplateBinding BorderThickness}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  
+                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
 
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled"  
+             Value="False">
+                    <Setter Property="Background"  
+              Value="#607080" />
+                    <Setter Property="Foreground"  
+              Value="#aaaaaa" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Window.Background>
         <!-- ResizeMode="NoResize" -->
-        <SolidColorBrush Color="#405060"/>
+        <SolidColorBrush Color="#233040"/>
     </Window.Background>
 
     <DockPanel Margin="0,0,0,0">
@@ -38,10 +58,7 @@
                     <PasswordBox.Template>
                         <ControlTemplate TargetType="{x:Type PasswordBox}">
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="2">
-                                <ScrollViewer x:Name="PART_ContentHost" 
-                              Margin="5" 
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                             </Border>
                         </ControlTemplate>
                     </PasswordBox.Template>
@@ -58,12 +75,23 @@
                         </ControlTemplate>
                     </TextBox.Template>
                 </TextBox>
-                <Button Name="masterBtn" Content = "👁" Width="27" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ToggleMasterVisibility" Background="#607080" BorderThickness="0" Margin="286,0,0,0"/>
-            </Grid>
+                <Button Name="masterBtn" Background="#607080" Content = "👁" Width="27" Height="26" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ToggleMasterVisibility"  Foreground="#D0E0F0" BorderThickness="0" Margin="286,0,0,0" Template="{StaticResource NoMouseOverButtonTemplate}" />
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                
+            </Grid>
+            <Label Name="errorLbl" Content="12" Margin="10,5,10,0" Background="#506070" Foreground="DodgerBlue" Visibility="Hidden">
+                <Label.Template>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Label.Template>
+            </Label>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                
                 <!-- Button with proper margins to avoid overlapping -->
-                <Button Name="logBtn" Content="Unlock 🔒" Background="#607080" Height="43" Width="151" Margin="0,30,10,0" Click="Login_Button" FontSize="10" FontWeight="DemiBold">
+                <Button Name="logBtn" Content="Unlock 🔒" Background="#607080" Height="43" Width="151" Margin="0,30,10,0" Click="Login_Button" FontSize="10" FontWeight="DemiBold" Foreground="#D0E0F0">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
@@ -86,7 +114,7 @@
                     </Button.Template>
                 </Button>
 
-                <Button Name="SetGet" Background="#607080" Height="43" Content="Create | Set Password" Width="150" Margin="10,30,0,0" Click="CreateAccount_Click" FontSize="10" FontWeight="DemiBold">
+                <Button Name="SetGet" Background="#607080" Height="43" Content="Create | Set Password" Width="150" Margin="10,30,0,0" Click="CreateAccount_Click" FontSize="10" FontWeight="DemiBold" Foreground="#D0E0F0">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <ControlTemplate.Triggers>

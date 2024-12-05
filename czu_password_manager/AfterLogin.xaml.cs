@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Xml.Serialization;
 
 namespace czu_password_manager
@@ -24,80 +12,72 @@ namespace czu_password_manager
     public partial class AfterLogin : Window
     {
         public ObservableCollection<Credential> Credentials { get; set; }
+
         public AfterLogin()
         {
             InitializeComponent();
-            
-            Credentials = new ObservableCollection<Credential>();
-            LoadCredentials();
-            DataContext = this;
-            
-        }
 
-        public void ChangeLabel(string message)
-        {
-            //label2.Content = message;
+            Credentials = new ObservableCollection<Credential>();
+            LoadCredentials(); // Load credentials when the window is initialized
+            DataContext = this;
         }
 
         private void AddNew(object sender, RoutedEventArgs e)
         {
-            addNew.Visibility = Visibility.Visible;
+            addNew.Visibility = Visibility.Visible; // Show the Add New Credential form
         }
 
         private void LoadCredentials()
         {
             string vaultPath = "vault.xml";
-            Credentials = new ObservableCollection<Credential>();
+
+            // Only load from file if it exists
             if (File.Exists(vaultPath))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Credential>));
-                using (StreamReader reader = new StreamReader(vaultPath)) 
+                using (StreamReader reader = new StreamReader(vaultPath))
                 {
                     var loadedCredentials = (ObservableCollection<Credential>)serializer.Deserialize(reader);
-                    Credentials.Clear();
+                    Credentials.Clear(); // Clear current credentials
                     foreach (var credential in loadedCredentials)
                     {
-                        Credentials.Add(credential);
+                        Credentials.Add(credential); // Add loaded credentials to ObservableCollection
                     }
                 }
-
             }
-
         }
+
         private void SaveCredentials(object sender, RoutedEventArgs e)
         {
-            
             try
             {
                 string vaultName = "vault.xml";
 
+                // Add the new credential to the ObservableCollection
                 Credentials.Add(new Credential
                 {
                     name = nameInput.Text,
                     username = usernameInput.Text,
                     password = passwordInput.Password
                 });
-                
-                XmlSerializer serializer2 = new XmlSerializer(typeof(ObservableCollection<Credential>));
-                using(StreamWriter writer = new StreamWriter(vaultName, false))
+
+                // Save updated credentials back to the XML file
+                XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Credential>));
+                using (StreamWriter writer = new StreamWriter(vaultName, false)) // Overwrite the file
                 {
-                    serializer2.Serialize(writer, Credentials);
+                    serializer.Serialize(writer, Credentials);
                 }
 
+                // Clear the input fields and hide the form
                 nameInput.Clear();
                 usernameInput.Clear();
                 passwordInput.Clear();
                 addNew.Visibility = Visibility.Collapsed;
-                credentialsListBox.ItemsSource = null;
-                credentialsListBox.ItemsSource = Credentials;
-
-
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}");
             }
-            
-
         }
     }
 }

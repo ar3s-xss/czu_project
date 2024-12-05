@@ -5,9 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:czu_password_manager"
         mc:Ignorable="d"
-        Title="UnleashMaster" Height="400" Width="600" MinWidth="450" MinHeight="350">
+        Title="UnleashMaster" Height="400" Width="600" MinWidth="450" MinHeight="350" MaxHeight="500" MaxWidth="700">
+    <Window.Resources>
+        <ControlTemplate x:Key="NoMouseOverButtonTemplate" TargetType="Button">
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled"  
+         Value="False">
+                    <Setter Property="Background"  
+          Value="#607080" />
+                    <Setter Property="Foreground"  
+          Value="#D0E0F0" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Window.Background>
-        <SolidColorBrush Color="#405060"/>
+        <SolidColorBrush Color="#233040"/>
     </Window.Background>
 
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,100,0,0">
@@ -26,15 +43,12 @@
                 <TextBox.Template>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
-                            <ScrollViewer x:Name="PART_ContentHost" 
-Margin="5" 
-VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                         </Border>
                     </ControlTemplate>
                 </TextBox.Template>
             </TextBox>
-            <Button Name="oldBtn" Content = "👁" Width="27" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ToggleOldPasswordVisibility" Background="#607080" BorderThickness="0" Margin="231,0,0,0"/>
+            <Button Name="oldBtn" Content = "👁" FontSize="14" Width="27" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ToggleOldPasswordVisibility" Background="#607080" Foreground="#D0E0F0" BorderThickness="0" Margin="231,0,0,0" Template="{StaticResource NoMouseOverButtonTemplate}"/>
         </Grid>
         <Label Margin="0,15,0,0" Padding="0" Content="New master password" Foreground="#b0c0d0"/>
         <Grid>
@@ -51,15 +65,12 @@ HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                 <TextBox.Template>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
-                            <ScrollViewer x:Name="PART_ContentHost" 
-Margin="5" 
-VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                         </Border>
                     </ControlTemplate>
                 </TextBox.Template>
             </TextBox>
-            <Button Name="newBtn" Content="👁" Width="27" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ToggleNewPasswordVisibility" Background="#607080" BorderThickness="0" Margin="231,0,0,0"/>
+            <Button Name="newBtn" Content="👁" FontSize="14" Width="27" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ToggleNewPasswordVisibility" Background="#607080" Foreground="#D0E0F0" BorderThickness="0" Margin="231,0,0,0" Template="{StaticResource NoMouseOverButtonTemplate}"/>
         </Grid>
         <Label Margin="0,15,0,0" Padding="0" Content="Again new master password" Foreground="#b0c0d0"/>
         <Grid>
@@ -76,15 +87,12 @@ HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                 <TextBox.Template>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
-                            <ScrollViewer x:Name="PART_ContentHost" 
-Margin="5" 
-VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                         </Border>
                     </ControlTemplate>
                 </TextBox.Template>
             </TextBox>
-            <Button Name="aNewBtn"  Content="👁" Width="27" Height="26" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ToggleAgainPasswordVisibility" Background="#607080" BorderThickness="0" Margin="231,0,0,0"/>
+            <Button Name="aNewBtn"  Content="👁" FontSize="14" Width="27" Height="26" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Click="ToggleAgainPasswordVisibility" Background="#607080" Foreground="#D0E0F0" BorderThickness="0" Margin="231,0,0,0" Template="{StaticResource NoMouseOverButtonTemplate}"/>
         </Grid>
         <Label Name="errorLbl" Margin="5,5,0,5" Background="#506070" Foreground="DodgerBlue">
             <Label.Template>
@@ -95,7 +103,8 @@ HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                 </ControlTemplate>
             </Label.Template>
         </Label>
-        <Button Width="140" Height="20" Margin="5" Content="Confirm" Click="SetChangeMaster">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Width="100" Height="20" Margin="0,0,20,0" Content="Confirm" Click="SetChangeMaster" Background="#607080" Foreground="#D0E0F0">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
@@ -117,6 +126,30 @@ HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                 </ControlTemplate>
             </Button.Template>
         </Button>
+            <Button Content="Go back" Width="100" Height="20" Margin="10,0,0,0" Click="Go_Back" Background="#607080" Foreground="#D0E0F0">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Trigger for MouseOver -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Opacity" Value="0.8"/>
+
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="Opacity" Value="1"/>
+                                <Setter Property="BorderBrush" Value="#b0c0d0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+        
     </StackPanel>
 
 

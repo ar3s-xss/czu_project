@@ -5,16 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:czu_password_manager"
         mc:Ignorable="d"
-        Title="AfterLogin" Height="450" Width="800">
+        Title="AfterLogin" Height="400" Width="700" ResizeMode="CanResize" MinWidth="600" MinHeight="400" MaxHeight="400" MaxWidth="800">
     <Window.Background>
-        <SolidColorBrush Color="#405060"/>
+        <SolidColorBrush Color="#233040"/>
     </Window.Background>
-    <DockPanel>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,0,0,0">
-            
-            <StackPanel Width="347" Background="Green">
-                <Label Content="This will contain vaults"/>
-                <ListBox Name="credentialsListBox" Height="354"  ItemsSource="{Binding Credentials}">
+
+    <!-- Use a Grid to control layout with rows and columns -->
+    <Grid>
+
+        <!-- Define rows for ListBox, Button, and Add New Section -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- ListBox will take the available space -->
+            <RowDefinition Height="Auto"/>
+            <!-- Button will take only the space it needs -->
+        </Grid.RowDefinitions>
+
+        <!-- Define columns for Left (ListBox) and Right (Add New Credentials) -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <!-- Left Section -->
+            <ColumnDefinition Width="*"/>
+            <!-- Center Section (empty space) -->
+            <ColumnDefinition Width="333"/>
+            <!-- Right Section (Add New Credentials) -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Section with ListBox -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Background="#7F8A94" VerticalAlignment="Stretch">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListBox Name="credentialsListBox" Background="#7F8A94" Foreground="White" ItemsSource="{Binding Credentials}" BorderBrush="#304050" MaxHeight="300">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -25,54 +45,72 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Content="+" Height="30" Width="40" Click="AddNew">
+            </ScrollViewer>
+        </StackPanel>
+
+        <!-- Right Section for Add New Credentials (hidden until triggered) -->
+        <StackPanel Name="addNew" Grid.Column="1" Width="330" Height="221" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="44,0,0,0">
+            <!-- Centered inner StackPanel -->
+            <Border Background="#405060" BorderBrush="#304050" BorderThickness="1" CornerRadius="10" Height="221">
+                <StackPanel Width="300" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Name" Foreground="#D0E0F0" HorizontalAlignment="Center"/>
+                <TextBox x:Name="nameInput" Width="200" Margin="0,0,0,5" HorizontalAlignment="Center">
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#304050" BorderThickness="1" CornerRadius="5">
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </TextBox.Template>
+                </TextBox>
+
+                <Label Content="Username" Foreground="#D0E0F0" HorizontalAlignment="Center"/>
+                <TextBox x:Name="usernameInput" Width="200" Margin="0,5,0,5" HorizontalAlignment="Center">
+                    <TextBox.Template>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#304050" BorderThickness="1" CornerRadius="5">
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </TextBox.Template>
+                </TextBox>
+
+                <Label Content="Password" Foreground="#D0E0F0" HorizontalAlignment="Center"/>
+                <PasswordBox x:Name="passwordInput" Width="200" Margin="0,5,0,5" HorizontalAlignment="Center">
+                    <PasswordBox.Template>
+                        <ControlTemplate TargetType="{x:Type PasswordBox}">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#304050" BorderThickness="1" CornerRadius="5">
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                            </Border>
+                        </ControlTemplate>
+                    </PasswordBox.Template>
+                </PasswordBox>
+
+                <Button Content="Save" Foreground="#D0E0F0" Background="#42526E" Click="SaveCredentials" HorizontalAlignment="Center" Width="69" Margin="5">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <ControlTemplate.Triggers>
-                                <!-- Trigger for MouseOver -->
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                    <Setter Property="Opacity" Value="0.8"/>
-
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="False">
-                                    <Setter Property="BorderThickness" Value="1"/>
-                                    <Setter Property="Opacity" Value="1"/>
-                                    <Setter Property="BorderBrush" Value="#b0c0d0"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-
             </StackPanel>
-            <StackPanel Name="addNew" Width="333" Height="392" Visibility="Collapsed">
-                <Label Content="name"></Label>
-                <TextBox x:Name="nameInput" Width="200" Margin="0,0,0,5"/>
-                <Label Content="username"></Label>
-                <TextBox x:Name="usernameInput" Width="200" Margin="0,5,0,5"/>
-                <Label Content="password"></Label>
-                <PasswordBox x:Name="passwordInput" Width="200" Margin="0,5,0,5"/>
-                
-                <Button Content="Save" Click="SaveCredentials"></Button>
-                
-
-            </StackPanel>
-
-            <!--<ListBox Width="283"/>-->
-
-
+            </Border>
         </StackPanel>
 
+        <!-- Bottom Button will always be at the bottom due to the Grid RowDefinition -->
+        <Border Grid.Row="1" Background="#6B7B8C" Margin="0" BorderThickness="1">
+            <Button Content="+" FontSize="20" Foreground="#D0E0F0" Background="#42526E" Click="AddNew" Height="40" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,10">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Border>
 
-        <!--
-        <Label x:Name="label2" Content="" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="115"/>
-        -->
-
-
-    </DockPanel>
-
+    </Grid>
 </Window>
