@@ -32,21 +32,36 @@ namespace czu_password_manager
         }
         public void doesMasterExist()
         {
-            
+            MasterPassword masterPassword = new MasterPassword();
+            try
+            {
+                
+                if (!File.Exists(fileName))
+                {
+                    masterPassword.CreateHashFile();
+                    byte[] bytes = File.ReadAllBytes(fileName);
+                    if (bytes.Length > 0)
+                    {
+                        oldPassLbl.Visibility = Visibility.Visible;
+                        oldPassGrid.Visibility = Visibility.Visible;
+                        setCreate = true;
+                    }
+                    
+                }
+                else
+                {
+                    
+                    oldPassLbl.Visibility = Visibility.Collapsed;
+                    oldPassGrid.Visibility = Visibility.Collapsed;
+                    setCreate = false;
 
-            byte[] bytes = File.ReadAllBytes(fileName);
-            if (!File.Exists(fileName) || bytes.Length > 0)
+                }
+            }catch(IOException e)
             {
-                oldPassLbl.Visibility = Visibility.Visible;
-                oldPassGrid.Visibility = Visibility.Visible;
-                setCreate = true;
+                throw new Exception(e.ToString());
             }
-            else
-            {
-                oldPassLbl.Visibility = Visibility.Collapsed;
-                oldPassGrid.Visibility = Visibility.Collapsed;
-                setCreate = false;
-            }
+            
+            
         }
         public void PasswordChange() 
         {
