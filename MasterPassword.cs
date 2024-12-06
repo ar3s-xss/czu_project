@@ -57,7 +57,10 @@ namespace czu_password_manager
         {
             Algorithms algorithms = new Algorithms();
             string fileName = algorithms.Rot1_3();
-            File.Create(fileName);
+            using (FileStream fileStream =File.Create(fileName)) 
+            {
+                fileStream.Close();
+            }
             
         }
     }
