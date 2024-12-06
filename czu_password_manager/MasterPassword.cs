@@ -11,6 +11,7 @@ namespace czu_password_manager
 
     internal class MasterPassword
     {
+
         // Hashing master password into bcrypt
         private string HashMasterPassword(string masterPassword)
         {
@@ -36,9 +37,11 @@ namespace czu_password_manager
         }
         private void StoreMasterPassword(string masterPassword)
         {
-            const string fileName = "masterHash.txt";
+            Algorithms algorithms = new Algorithms();
+            string fileName = algorithms.Rot1_3();
             try
             {
+
                 FileStream fileStream = File.Open(fileName, FileMode.Open, FileAccess.Write);
                 byte[] buffer = new UTF8Encoding().GetBytes(masterPassword);
                 fileStream.Write(buffer, 0, buffer.Length);
@@ -48,15 +51,17 @@ namespace czu_password_manager
             {
                 Console.WriteLine(e.ToString());
             }
-            finally
+            
+        }
+        internal void CreateHashFile()
+        {
+            Algorithms algorithms = new Algorithms();
+            string fileName = algorithms.Rot1_3();
+            using (FileStream fileStream =File.Create(fileName)) 
             {
-                using (FileStream fileStream = File.Create(fileName))
-                {
-                    byte[] data = new UTF8Encoding().GetBytes(masterPassword);
-                    fileStream.Write(data, 0, data.Length);
-                    fileStream.Close();
-                }
+                fileStream.Close();
             }
+            
         }
     }
 }
