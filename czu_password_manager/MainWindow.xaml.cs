@@ -22,41 +22,64 @@ namespace czu_password_manager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MasterPassword _masterObject = new MasterPassword();
         public MainWindow()
         {
             InitializeComponent();
             
+            //masterPassword.CreateHashFile();
         }
 
         private void Login_Button(object sender, RoutedEventArgs e)
         {
+            
             CheckPassword(master.Password);
         }
         // Provizorni kontrola hesla
         private void CheckPassword(string password)
         {
-            MasterPassword masterObject = new MasterPassword();
-            Algorithms algObject = new Algorithms();
-            string master = File.ReadAllText(algObject.Rot1_3());
-            bool masterMatch = masterObject.VerifyMasterPassword(password, master);
             
-            if (masterMatch == true)
-            {
-                
-                AfterLogin afterLoginWindow = new AfterLogin();
-                afterLoginWindow.Show();
-                //afterLoginWindow.ChangeLabel("You have entered your password vault!!!");
+            Algorithms algObject = new Algorithms();
+            bool masterMatch;
 
-                this.Close();
-            } else
+            // Check if the password is null or empty
+            if (string.IsNullOrEmpty(password))
             {
-                //label1.Content = "Wrong Password!!!";
-                //label1.Background = new SolidColorBrush(Colors.Red);
                 errorLbl.Visibility = Visibility.Visible;
-                errorLbl.Content = "Wrong master password!";
-                
+                errorLbl.Content = "Master password isn't yet set \U0001F603";
+            }
+            else
+            {
+                try
+                {
+                    string master = File.ReadAllText(algObject.Rot1_3(algObject.masterFile));
+                    masterMatch = _masterObject.VerifyMasterPassword(password, master);
+
+                    if (masterMatch)
+                    {
+                        AfterLogin afterLoginWindow = new AfterLogin();
+                        afterLoginWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        errorLbl.Visibility = Visibility.Visible;
+                        errorLbl.Content = "Wrong master password!";
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                    errorLbl.Visibility = Visibility.Visible;
+                    errorLbl.Content = "Master password file not found!";
+                }
+                catch (Exception ex)
+                {
+                    errorLbl.Visibility = Visibility.Visible;
+                    errorLbl.Content = $"An error occurred: {ex.Message}";
+                }
             }
         }
+
         private void password_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter) 

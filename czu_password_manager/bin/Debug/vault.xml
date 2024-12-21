@@ -1,103 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCredential xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Credential>
-    <name>b</name>
-    <username>b</username>
-    <password>b</password>
+    <name>Alza.cz</name>
+    <username>josef82</username>
+    <password>mercedesSL63</password>
   </Credential>
   <Credential>
-    <name>a</name>
-    <username>a</username>
-    <password>a</password>
+    <name>test</name>
+    <username>test</username>
+    <password>test</password>
   </Credential>
   <Credential>
-    <name>datart.cz</name>
-    <username>jenda233</username>
-    <password>MojeJendaHeslo</password>
+    <name>test2</name>
+    <username>test2</username>
+    <password>test2</password>
   </Credential>
   <Credential>
-    <name>a</name>
-    <username>a</username>
-    <password>a</password>
+    <name>Smarty.cz</name>
+    <username>PepaJeSuper2000</username>
+    <password>NotSoSmarty123</password>
   </Credential>
   <Credential>
-    <name>asda</name>
-    <username>sada</username>
-    <password>sdad</password>
+    <name>netflix</name>
+    <username>Jana456</username>
+    <password>a1234567890</password>
   </Credential>
   <Credential>
-    <name>aaa</name>
-    <username>asdsaas</username>
-    <password>asdasdas</password>
+    <name>UIS PEF</name>
+    <username>xabcd001@studenti.czu.cz</username>
+    <password>1234567890A</password>
   </Credential>
   <Credential>
-    <name>asdasdas</name>
-    <username>adasdasda</username>
-    <password>adasdasdasda</password>
+    <name>moodle.cz</name>
+    <username>xabcd001</username>
+    <password>1234567890A</password>
   </Credential>
   <Credential>
-    <name>asdadas</name>
-    <username>asdasdad</username>
-    <password>adadasda</password>
-  </Credential>
-  <Credential>
-    <name>asdadas</name>
-    <username>asdasdasd</username>
-    <password>adasda</password>
-  </Credential>
-  <Credential>
-    <name>hahdahda</name>
-    <username>ahdsahdahhd</username>
-    <password>hashdashasdhads</password>
-  </Credential>
-  <Credential>
-    <name>asdadada</name>
-    <username>asdasdadada</username>
-    <password>asdadadasda</password>
-  </Credential>
-  <Credential>
-    <name>sdadaad</name>
-    <username>adadada</username>
-    <password>asdadasdadas</password>
-  </Credential>
-  <Credential>
-    <name>adasdad</name>
-    <username>asdasdas</username>
-    <password>adadada</password>
-  </Credential>
-  <Credential>
-    <name>adasdad</name>
-    <username>adadada</username>
-    <password>adadada</password>
-  </Credential>
-  <Credential>
-    <name>dssa</name>
-    <username>sdafasd</username>
-    <password>asdaa</password>
-  </Credential>
-  <Credential>
-    <name>adsad</name>
-    <username>adada</username>
-    <password>asdasda</password>
-  </Credential>
-  <Credential>
-    <name>asdadada</name>
-    <username>adasdadada</username>
-    <password>adadadajk78978978</password>
-  </Credential>
-  <Credential>
-    <name>asdasd</name>
-    <username>asdasda</username>
-    <password>adadad</password>
-  </Credential>
-  <Credential>
-    <name>adadasd</name>
-    <username>asdasdasd</username>
-    <password>asdasdasda</password>
-  </Credential>
-  <Credential>
-    <name>fffffffffff</name>
-    <username>fffffffffffffffff</username>
-    <password>ffffffffffffffff</password>
+    <name>nic</name>
+    <username>nic</username>
+    <password>abc</password>
   </Credential>
 </ArrayOfCredential>

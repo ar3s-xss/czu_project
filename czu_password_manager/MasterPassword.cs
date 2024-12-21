@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using BCrypt.Net;
 using System.IO;
+using System.Windows;
 namespace czu_password_manager
 {
 
@@ -38,28 +39,31 @@ namespace czu_password_manager
         private void StoreMasterPassword(string masterPassword)
         {
             Algorithms algorithms = new Algorithms();
-            string fileName = algorithms.Rot1_3();
+            string fileName = algorithms.Rot1_3(algorithms.masterFile);
             try
             {
 
-                FileStream fileStream = File.Open(fileName, FileMode.Open, FileAccess.Write);
+                FileStream fileStream = File.Open(fileName, FileMode.OpenOrCreate, FileAccess.Write);
                 byte[] buffer = new UTF8Encoding().GetBytes(masterPassword);
                 fileStream.Write(buffer, 0, buffer.Length);
                 fileStream.Close();
             }
             catch (IOException e)
             {
-                Console.WriteLine(e.ToString());
+                MessageBox.Show(e.Message);
             }
             
         }
         internal void CreateHashFile()
         {
             Algorithms algorithms = new Algorithms();
-            string fileName = algorithms.Rot1_3();
-            using (FileStream fileStream =File.Create(fileName)) 
+            string fileName = algorithms.Rot1_3(algorithms.masterFile);
+            if (!File.Exists(fileName))
             {
-                fileStream.Close();
+                using (FileStream fileStream = File.Create(fileName))
+                {
+                    fileStream.Close();
+                }
             }
             
         }

@@ -10,11 +10,8 @@
     <Window.Resources>
         <ControlTemplate x:Key="NoMouseOverButtonTemplate"   
                  TargetType="Button">
-            <Border Background="{TemplateBinding Background}"  
-          BorderBrush="{TemplateBinding BorderBrush}"  
-          BorderThickness="{TemplateBinding BorderThickness}">
-                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  
-                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
             </Border>
 
             <ControlTemplate.Triggers>
@@ -67,10 +64,7 @@
                     <TextBox.Template>
                         <ControlTemplate TargetType="{x:Type TextBox}">
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="2">
-                                <ScrollViewer x:Name="PART_ContentHost" 
-  Margin="5" 
-  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                             </Border>
                         </ControlTemplate>
                     </TextBox.Template>

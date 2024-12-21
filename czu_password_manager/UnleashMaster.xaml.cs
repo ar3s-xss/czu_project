@@ -20,59 +20,50 @@ namespace czu_password_manager
     /// </summary>
     public partial class UnleashMaster : Window
     {
+        private Algorithms _algorithms = new Algorithms();
         public UnleashMaster()
         {
             InitializeComponent();
+            doesMasterExist();
         }
-        const string fileName = "masterHash.txt";
+        //const string fileName = "masterHash.txt";
+        string fileName = ""; 
         private bool setCreate = false;
-        public void PasswordSet()
-        {
-            
-        }
+        
         public void doesMasterExist()
         {
-            MasterPassword masterPassword = new MasterPassword();
-            try
-            {
-                
-                if (!File.Exists(fileName))
-                {
-                    masterPassword.CreateHashFile();
-                    byte[] bytes = File.ReadAllBytes(fileName);
-                    if (bytes.Length > 0)
-                    {
-                        oldPassLbl.Visibility = Visibility.Visible;
-                        oldPassGrid.Visibility = Visibility.Visible;
-                        setCreate = true;
-                    }
-                    
-                }
-                else
-                {
-                    
-                    oldPassLbl.Visibility = Visibility.Collapsed;
-                    oldPassGrid.Visibility = Visibility.Collapsed;
-                    setCreate = false;
+           
+            fileName = _algorithms.Rot1_3(_algorithms.masterFile);
 
-                }
-            }catch(IOException e)
+            if (File.Exists(fileName))
             {
-                throw new Exception(e.ToString());
+                    
+                byte[] bytes = File.ReadAllBytes(fileName);
+                if (bytes.Length > 0)
+                {
+                    oldPassLbl.Visibility = Visibility.Visible;
+                    oldPassGrid.Visibility = Visibility.Visible;
+                    setCreate = true;
+                }
+                    
+            }
+            else
+            {
+                    
+                oldPassLbl.Visibility = Visibility.Collapsed;
+                oldPassGrid.Visibility = Visibility.Collapsed;
+                setCreate = false;
+                    
             }
             
+        
             
         }
-        public void PasswordChange() 
-        {
-
-            string master = File.ReadAllText(fileName);
-
-                
-        }
+        
         private void SetChangeMaster(object sender, RoutedEventArgs e)
         {
             MasterPassword masterObject = new MasterPassword();
+            fileName = _algorithms.Rot1_3(_algorithms.masterFile);
             if (setCreate == true)
             {
                 string master = File.ReadAllText(fileName);
@@ -86,7 +77,7 @@ namespace czu_password_manager
                         mainWindow.Show();
                         this.Close();
                     }
-                } else if (isMaster && !(newPassword.Password == againNewPassword.Password))
+                } else if (isMaster && !(newPassword.Password == againNewPassword.Password)) 
                 {
                     errorLbl.Content = "Passwords do not match!";
                 } else
