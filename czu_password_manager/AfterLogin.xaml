@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:czu_password_manager"
         mc:Ignorable="d"
         Title="AfterLogin" Height="400" Width="700" ResizeMode="CanResize" MinWidth="600" MinHeight="400" MaxHeight="400" MaxWidth="800">
+        
     <Window.Resources>
         <ControlTemplate x:Key="NoMouseOverButtonTemplate"   
              TargetType="Button">

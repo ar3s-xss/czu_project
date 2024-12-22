@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace czu_password_manager
 {
@@ -22,18 +23,20 @@ namespace czu_password_manager
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MasterPassword _masterObject = new MasterPassword();
+        //private MasterPassword _masterObject = new MasterPassword();
         public MainWindow()
         {
             InitializeComponent();
-            
             //masterPassword.CreateHashFile();
+            
         }
-
+        
         private void Login_Button(object sender, RoutedEventArgs e)
         {
             
-            CheckPassword(master.Password);
+            CheckPassword(masterButton.Password);
+            
+            
         }
         // Provizorni kontrola hesla
         private void CheckPassword(string password)
@@ -53,11 +56,17 @@ namespace czu_password_manager
                 try
                 {
                     string master = File.ReadAllText(algObject.Rot1_3(algObject.masterFile));
-                    masterMatch = _masterObject.VerifyMasterPassword(password, master);
+                    masterMatch = Pbkdf2PasswordManager.VerifyPassword(password, master);//    _masterObject.VerifyMasterPassword(password, master);
 
                     if (masterMatch)
                     {
-                        AfterLogin afterLoginWindow = new AfterLogin();
+                
+                        //  XmlEncDec.EncryptXmlVault(algObject.Rot1_3(algObject.vaultFile), password);
+                        if (File.Exists(algObject.Rot1_3(algObject.encryptedVault))){
+                            XmlEncDec.DecryptXmlVault(password, algObject.Rot1_3(algObject.encryptedVault));
+                        }
+                            
+                        AfterLogin afterLoginWindow = new AfterLogin(password);
                         afterLoginWindow.Show();
                         this.Close();
                     }
@@ -84,7 +93,7 @@ namespace czu_password_manager
         {
             if (e.Key == Key.Enter) 
             {
-                CheckPassword(master.Password);
+                CheckPassword(masterButton.Password);
             }
         }
 
@@ -99,18 +108,18 @@ namespace czu_password_manager
         
         private void ToggleMasterVisibility(object sender, RoutedEventArgs e)
         {
-            if (master.Visibility == Visibility.Visible)
+            if (masterButton.Visibility == Visibility.Visible)
             {
-                masterPassword.Text = master.Password;
-                master.Visibility = Visibility.Collapsed;
+                masterPassword.Text = masterButton.Password;
+                masterButton.Visibility = Visibility.Collapsed;
                 masterPassword.Visibility = Visibility.Visible;
                 masterBtn.Content = "X";
             }
             else
             {
-                master.Password = masterPassword.Text;
+                masterButton.Password = masterPassword.Text;
                 masterPassword.Visibility = Visibility.Collapsed;
-                master.Visibility = Visibility.Visible;
+                masterButton.Visibility = Visibility.Visible;
                 masterBtn.Content = "👁";
             }
         }

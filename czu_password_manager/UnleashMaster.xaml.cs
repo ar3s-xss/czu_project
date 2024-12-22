@@ -62,17 +62,19 @@ namespace czu_password_manager
         
         private void SetChangeMaster(object sender, RoutedEventArgs e)
         {
-            MasterPassword masterObject = new MasterPassword();
+            //MasterPassword masterObject = new MasterPassword();
             fileName = _algorithms.Rot1_3(_algorithms.masterFile);
             if (setCreate == true)
             {
                 string master = File.ReadAllText(fileName);
-                bool isMaster = masterObject.VerifyMasterPassword(oldPassword.Password, master);
+                bool isMaster = Pbkdf2PasswordManager.VerifyPassword(oldPassword.Password, master);//  masterObject.VerifyMasterPassword(oldPassword.Password, master);
                 if (isMaster == true && !(newPassword.Password == string.Empty || againNewPassword.Password == string.Empty))
                 {
                     if (newPassword.Password == againNewPassword.Password)
                     {
-                        masterObject.CreateMasterPassword(newPassword.Password);
+                        Algorithms algorithms = new Algorithms();
+                        Pbkdf2PasswordManager.SaveHashToFile(fileName,Pbkdf2PasswordManager.HashPassword(newPassword.Password));
+                        //masterObject.CreateMasterPassword(newPassword.Password);
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
                         this.Close();
@@ -93,7 +95,9 @@ namespace czu_password_manager
                 {
                     if (newPassword.Password == againNewPassword.Password)
                     {
-                        masterObject.CreateMasterPassword(newPassword.Password);
+                        Algorithms algorithms = new Algorithms();
+                        Pbkdf2PasswordManager.SaveHashToFile(fileName, Pbkdf2PasswordManager.HashPassword(newPassword.Password));
+                        //masterObject.CreateMasterPassword(newPassword.Password);
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
                         this.Close();

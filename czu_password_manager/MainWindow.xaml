@@ -51,7 +51,7 @@
             <Label Name="label1" HorizontalAlignment="Center"/>
             <!-- PasswordBox above the Button -->
             <Grid>
-                <PasswordBox Name="master" BorderThickness="1" Background="#607080" BorderBrush="#203040" Width="323" Margin="5" Height="74" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" KeyDown="password_KeyDown">
+                <PasswordBox Name="masterButton" BorderThickness="1" Background="#607080" BorderBrush="#203040" Width="323" Margin="5" Height="74" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" KeyDown="password_KeyDown">
                     <PasswordBox.Template>
                         <ControlTemplate TargetType="{x:Type PasswordBox}">
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="2">
