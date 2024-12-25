@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Threading;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -373,6 +375,54 @@ namespace czu_password_manager
                 passwordInput.Visibility = Visibility.Visible;
                 masterBtn.Content = "👁";
             }
+        }
+        private void AddToClipboardUsername(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(usernameInput.Text);
+                BrushConverter bc = new BrushConverter();
+                usrClip.BorderBrush = (Brush)bc.ConvertFromString("#39FF14");
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+            DispatcherTimer timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(2) // Duration to keep the new BorderBrush
+            };
+            timer.Tick += (s, args) =>
+            {
+                // Reset to original BorderBrush (e.g., Black)
+                usrClip.BorderBrush = Brushes.Black;
+                timer.Stop(); // Stop the timer after resetting
+            };
+            timer.Start();
+        }
+        private void AddToClipboardPassword(object sender, RoutedEventArgs e) 
+        {
+            try
+            {
+                Clipboard.SetText(passwordInput.Password);
+                BrushConverter bc = new BrushConverter();
+                passwdClip.BorderBrush = (Brush)bc.ConvertFromString("#39FF14");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            DispatcherTimer timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(2) // Duration to keep the new BorderBrush
+            };
+            timer.Tick += (s, args) =>
+            {
+                // Reset to original BorderBrush (e.g., Black)
+                passwdClip.BorderBrush = Brushes.Black;
+                timer.Stop(); // Stop the timer after resetting
+            };
+            timer.Start();
         }
     }
 }

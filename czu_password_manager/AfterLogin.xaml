@@ -85,17 +85,27 @@
                 </TextBox>
 
                 <Label Content="Username" Foreground="#D0E0F0" HorizontalAlignment="Center"/>
+                    <Grid>
                     <TextBox x:Name="usernameInput" Width="200" Margin="0,5,0,5" HorizontalAlignment="Center" Background="#90A0B0">
-                    <TextBox.Template>
-                        <ControlTemplate TargetType="{x:Type TextBox}">
-                            <Border Background="{TemplateBinding Background}" BorderBrush="#304050" BorderThickness="1" CornerRadius="5">
-                                <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
-                            </Border>
-                        </ControlTemplate>
-                    </TextBox.Template>
-                </TextBox>
-
-                <Label Content="Password" Foreground="#D0E0F0" HorizontalAlignment="Center"/>
+                        <TextBox.Template>
+                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="#304050" BorderThickness="1" CornerRadius="5">
+                                    <ScrollViewer x:Name="PART_ContentHost" Margin="5" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                                </Border>
+                            </ControlTemplate>
+                        </TextBox.Template>
+                    </TextBox>
+                        <Button x:Name="usrClip" Width="27" Content="📋" Height="26" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0" Click="AddToClipboardUsername" BorderThickness="2" BorderBrush="Black">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                    <Label Content="Password" Foreground="#D0E0F0" HorizontalAlignment="Center"/>
                     <Grid>
                         <PasswordBox x:Name="passwordInput" Width="200" Margin="0,5,0,5" HorizontalAlignment="Center" Background="#90A0B0">
                             <PasswordBox.Template>
@@ -116,6 +126,15 @@
                             </TextBox.Template>
                         </TextBox>
                         <Button Name="masterBtn" Background="#90A0B0" Content = "👁" Width="27" Height="26" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Click="TogglePasswordVisibility"  Foreground="#D0E0F0" BorderThickness="0" Margin="220,0,0,0" Template="{StaticResource NoMouseOverButtonTemplate}" />
+                        <Button x:Name="passwdClip" Width="27" Content="📋" Height="26" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0" Click="AddToClipboardPassword" BorderThickness="2" BorderBrush="Black">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </Grid>
                     <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Button Name="saveButton" Content="Save" Foreground="#D0E0F0" Background="#42526E" Click="SaveCredentials" HorizontalAlignment="Center" Width="69" Margin="20,5,5,5">
