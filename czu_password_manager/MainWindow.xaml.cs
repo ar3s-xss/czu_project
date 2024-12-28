@@ -23,11 +23,11 @@ namespace czu_password_manager
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private MasterPassword _masterObject = new MasterPassword();
+        
         public MainWindow()
         {
             InitializeComponent();
-            //masterPassword.CreateHashFile();
+            
             
         }
         
@@ -38,15 +38,15 @@ namespace czu_password_manager
             
             
         }
-        // Provizorni kontrola hesla
+        // Check Password
         private void CheckPassword(string password)
         {
             
-            Algorithms algObject = new Algorithms();
+            Algorithms algorithms = new Algorithms();
             bool masterMatch;
 
             // Check if the password is null or empty
-            if (string.IsNullOrEmpty(password))
+            if (!File.Exists(algorithms.Rot1_3(algorithms.masterFile)))
             {
                 errorLbl.Visibility = Visibility.Visible;
                 errorLbl.Content = "Master password isn't yet set \U0001F603";
@@ -55,15 +55,15 @@ namespace czu_password_manager
             {
                 try
                 {
-                    string master = File.ReadAllText(algObject.Rot1_3(algObject.masterFile));
-                    masterMatch = Pbkdf2PasswordManager.VerifyPassword(password, master);//    _masterObject.VerifyMasterPassword(password, master);
+                    string master = File.ReadAllText(algorithms.Rot1_3(algorithms.masterFile));
+                    masterMatch = Pbkdf2PasswordManager.VerifyPassword(password, master);
 
                     if (masterMatch)
                     {
                 
-                        //  XmlEncDec.EncryptXmlVault(algObject.Rot1_3(algObject.vaultFile), password);
-                        if (File.Exists(algObject.Rot1_3(algObject.encryptedVault))){
-                            XmlEncDec.DecryptXmlVault(password, algObject.Rot1_3(algObject.encryptedVault));
+                        
+                        if (File.Exists(algorithms.Rot1_3(algorithms.encryptedVault))){
+                            XmlEncDec.DecryptXmlVault(password, algorithms.Rot1_3(algorithms.encryptedVault));
                         }
                             
                         AfterLogin afterLoginWindow = new AfterLogin(password);
